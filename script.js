@@ -34,6 +34,26 @@ const addTodo = (event) => {
     todoInput.value = ""
 }
 
+const deleteComplete = (event) => {
+    const item = event.target;
+    //console.log(item)
+    if (item.classList.contains("delete-btn")) {
+        //console.log(item.classList)
+        //console.log(item)
+        //item.remove() //deletes only delete-btn
+        const todo = item.parentElement; //finding parentElement
+        todo.classList.add("fall")
+
+        //func to remove todo after transition ends
+        todo.addEventListener("transitionend", () => { 
+            todo.remove()
+        })
+    } else if (item.classList.contains("completed-btn")) {
+        const todo = item.parentElement;
+        todo.classList.toggle("completed");
+    }
+}
 
 //event-listeners
 todoBtn.addEventListener("click", addTodo)
+todoList.addEventListener("click", deleteComplete)
